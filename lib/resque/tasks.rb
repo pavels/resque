@@ -38,6 +38,8 @@ namespace :resque do
 
     worker.log "Starting worker #{worker}"
 
+    Resque.redis.client.reconnect
+
     worker.work(ENV['INTERVAL'] || 5) # interval, will block
   end
 
